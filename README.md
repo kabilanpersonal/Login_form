@@ -64,3 +64,32 @@ const port = 3000;
 app.listen(port, () =>{
     console.log(`Server running on port ${port}`);
 });
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Login</title>
+
+</head>
+
+<body>
+
+<h1>Login</h1>
+
+<form action="/api/validate" method="get">
+
+<input type="text" name="username" placeholder="Username">
+
+<input type="password" name="password" placeholder="Password">
+
+<input type="submit" value="Login">
+
+</form>
+
+</body>
+
+</html>
