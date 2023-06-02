@@ -88,3 +88,19 @@ html file
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+</head>
+<body>
+<h1>Login</h1>
+<form action="http://localhost:3000/api/validate?Username=?&&Password=?" method="get">
+<input type="text" name="Username" placeholder="Username" required>
+<input type="password" name="Password" placeholder="Password"required>
+<input type="submit" value="Login">
+</form>
+
+</body>
+</html>
