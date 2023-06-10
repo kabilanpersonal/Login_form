@@ -1,174 +1,134 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
-    <link rel="stylesheet" href="assets/welcome.css">
-
-
-
-
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<html lang="en" dir="ltr">
+  <head>
     <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="nofollow" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin=”anonymous”>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
-</head>
-<body>
+    <link rel="stylesheet" href="assets/side.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
    
+  </head>
+  <body>
 
-        <nav>
-            <a href="#first"><i class="far fa-user-plus"></i>Add User</a>
-            <a href="#second"><i class="fas fa-search"></i>Search User</a>
-            <a href="#third"><i class="far fa-user-times"></i>Delete User</a>
-            
-            </nav>
-            
-            <div class= 'container'> 
-            <section id= 'first'>
-            
+    <input type="checkbox" id="check">
+    <!--header area start-->
+    <header>
+      <label for="check">
+        <i class="fas fa-bars" id="sidebar_btn"></i>
+      </label>
+      <div class="left_area">
+        <h3>Project<span>Details</span></h3>
+      </div>
+      <div class="right_area">
+        <a href="index.html" class="logout_btn">Logout</a>
+      </div>
+    </header>
+    <!--header area end-->
+    <!--mobile navigation bar start-->
+    <div class="mobile_nav">
+      <div class="nav_bar">
+       
+        <i class="fa fa-bars nav_btn"></i>
+      </div>
+      <div class="mobile_nav_items">
+        <a href="add.html"><i class="fas fa-plus"></i><span>Add Project Details</span></a>
+        <a href="retrieve.html"><i class="fas fa-search"></i><span>Retrieve Project Details</span></a>
+        <a href="delete.html"><i class="fas fa-trash"></i><span>Delete Project Details</span></a>
+      </div>
+    </div>
+    <!--mobile navigation bar end-->
+    <!--sidebar start-->
+    <div class="sidebar">
+      <div class="profile_info">
+        <h4>Menu</h4>
+       
+      </div>
+      <a href="add.html"><i class="fas fa-plus"></i><span>Add Project Details</span></a>
+      <a href="retrieve.html"><i class="fas fa-search"></i><span>Retrieve Project Details</span></a>
+      <a href="delete.html"><i class="fas fa-trash"></i><span>Delete Project Details</span></a>
+     
+    </div>
+    
+    <!--sidebar end-->
+    <div class="content">
         
-
-                <form class="frm" >
-                <label for="project-id">Project ID:</label>
-                <input type="text" id="Projectid" name="project-id" placeholder="Enter Project ID" required>
-                
-                <label for="project-name">Project Name:</label>
-                <input type="text" id="Projectname" name="project-name" placeholder="Enter Project Name" required>
-                
-                <label for="total-members">Total Members:</label>
-                <input type="text" id="Totalmembers" name="total-members" placeholder="Enter Total Members" required>
-                
-                <label for="start-date">Start Date:</label>
-                <input type="text" id="Startdate" name="start-date" placeholder="Enter Start Date" required>
-                
-                <label for="end-date">End Date:</label>
-                <input type="text" id="Enddate" name="end-date" placeholder="Enter End Date" required>
-                
-                <button type="button" onclick="add()" class="btn">Submit</button>
-                <!-- <input type="submit" value="Submit" onclick="add()"> -->
-                <input type="reset" value="Clear"><br>
-                <h3 id="msg" style="color: red;"></h3> 
-                </form>
-                
-                
-
-            </section>
-            
-            <section id= 'second'>
-                
-
-                <form>
-                <label for="search-query">Search User:</label>
-                <input type="text" id="search-query" name="search-query" placeholder="Enter username or email" required>
-                
-                <button type="button" onclick="getData()">Search</button>
-                </form>
-                <br>
-                <p id="searchresult"></p>
-                <button type="button" class="btn"  href="javascript:history.go(-1)">Back</button>
-                
-            </section>
-            
-            <section id= 'third'>
-              
-                <form>
-                <label for="search-query">Search User:</label>
-                <input type="text" id="search-query" name="search-query" placeholder="Enter username or email" required>
-                
-                <input type="submit" value="Search" onclick="confirmDelete()">
-                </form>
-            </section>
-            
-            
-            </div>
-
-<script>
-// Add User
-        function add() {
-
-            
-            const Projectid = document.getElementById("Projectid").value;
-            const Projectname = document.getElementById("Projectname").value;
-            const Totalmembers = document.getElementById("Totalmembers").value;
-            const Startdate= document.getElementById("Startdate").value;
-            const Enddate = document.getElementById("Enddate").value;
-
-if (Projectname && Projectid && Totalmembers && Startdate && Enddate ) {
-
-    fetch('http://localhost:3001/add1', {
-
-    method: 'POST',
-    body: JSON.stringify({
-
-      Projectid:Projectid,
-      Projectname:Projectname, 
-      Totalmembers:Totalmembers,
-      Startdate:Startdate,
-      Enddate:Enddate
-       }),
-
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    }
-
-    })
-    .then(
-      respose => respose.json()
-    )
-  .then(function(data){
-    console.log("inside the function")
-    console.log(data)
-
-      if(data==true)
-      {
-        console.log("Inside the if condition")
-         document.getElementById("msg").innerHTML="Data Added Successfully !!!";
-      }else{
-        document.getElementById("msg").innerHTML=data.message;
-      }
-  }).catch(error => {console.error('Error:', error.message);
-  
-
-});
-
-  }
-  else{
-    alert("Please Fill all the fields")
-  }
-}
-
- </script>
-
-
-
-<script>
-
-// Search by name
-
-   function getData(){
-      const word = document.getElementById("search-query").value;
-       const response=  fetch(`http://localhost:3001/getOne2:Projectname=${word}`).then(
-    respose => respose.json()
-)
-.then(data => {
-    console.log(data)
-    if(data.length > 1){
-        document.getElementById("searchresult").innerHTML=data;
+     <input id="input" type="text" placeholder="Name" autofocus> </input>
+     <div id="display-data"></div>
       
-    }
-    else{
-        window.location.href = "invalid.html";
-    }
-  })
+<!-- <div id="data"></div>
+<input type="text"id="search"> -->
+          </div>
+          
+          <br>
+          <br>
+          <br>
 
+          
+          
+    <script type="text/javascript">
+    $(document).ready(function(){ 
+        // toggle button 
+      $('.nav_btn').click(function(){
+        $('.mobile_nav_items').toggleClass('active');
+      });
+    });  // Back button disable
+    // window.history.forward();
+    //     function noBack() {
+    //         window.history.forward();
+    //     }
+
+    //
+    const apiEndpoint = "http://localhost:3001/getOne2/Projectname";
+    const display = document.querySelector("#display-data");
+    const input = document.querySelector("#input");
+
+    const getData = async () => {
+      const res = await fetch(apiEndpoint);
+      const data = await res.json();
+      return data
     }
 
+    const displayUsers = async () =>
+    {
+      let query = input.value;
+      console.log("Query::", query);
+    
+    const payload = await getData();
+  
+  let dataDisplay = payload.filter((eventData) => {
+    if (query === ""){return eventData}
+    else if (eventData.project_name.toLowerCase().includes(query.toLowerCase()))
+    {
+      return eventData
+    }
+  }).map((object) => {
+    const {project_name, project_id, total_team_members, start_date, end_date } = object;
+    return `
+    <div class="container">
+      <p>Project Name: ${project_name}</p>
+      <p>Project ID: ${project_id}</p>
+      <p>Total Team Members: ${total_team_members}</p>
+      <p>Start Date: ${start_date}</p>
+      <p>End Date: ${end_date}</p>
+      </div>
+      <hr>
+      `
+
+  }).join("");
+  display.innerHTML = dataDisplay;
+  }
+  displayUsers();
+
+  input.addEventListener("input", () =>{
+    displayUsers();
+  });
+
+// fetch(`http://localhost:3001/fetchproject`)
 </script>
-</body>
+
+  </body>
 </html>
